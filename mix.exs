@@ -1,7 +1,7 @@
 defmodule Ael.Mixfile do
   use Mix.Project
 
-  @version "1.34.1"
+  @version "1.34.2"
 
   def project do
     [app: :ael_api,

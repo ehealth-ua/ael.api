@@ -1,5 +1,7 @@
-Change log for versions 1.34.0 - 1.34.1
+Change log for versions 1.34.0 - 1.34.2
 
 **Other**:
 
+Improve code formatting
+Improve code formatting
 Cleanup ci scripts
