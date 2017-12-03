@@ -1,7 +1,9 @@
-Change log for versions 1.34.0 - 1.34.2
+Change log for versions 1.34.0 - 1.34.3
 
 **Other**:
 
+Remove confex
+Also, revise configs
 Improve code formatting
 Improve code formatting
 Cleanup ci scripts
