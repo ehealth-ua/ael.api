@@ -1,13 +1,8 @@
 use Mix.Config
 
 config :ael_api, Ael.Web.Endpoint,
-  on_init: {Ael.Web.Endpoint, :load_from_system_env, []},
   http: [port: "${PORT}"],
-  url:  [
-    host: "${HOST}",
-    port: "${PORT}"
-  ],
-  secret_key_base: {:system, "SECRET_KEY"},
+  secret_key_base: "${SECRET_KEY}",
   debug_errors: false,
   code_reloader: false
 

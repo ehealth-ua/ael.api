@@ -17,8 +17,4 @@ defmodule Ael.Web.Endpoint do
   plug Plug.Head
 
   plug Ael.Web.Router
-
-  def load_from_system_env(config) do
-    {:ok, config}
-  end
 end
