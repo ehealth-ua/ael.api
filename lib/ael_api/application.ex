@@ -4,7 +4,6 @@ defmodule Ael do
   """
   use Application
   alias Ael.Web.Endpoint
-  alias Confex.Resolver
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -53,25 +52,18 @@ defmodule Ael do
 
     Registry.register(Ael.Registry, :gcs_service_account_id, Map.get(gcs_service_account, "client_email"))
     Registry.register(Ael.Registry, :gcs_service_account_key, :public_key.der_decode(:'RSAPrivateKey', der))
-    Registry.register(Ael.Registry, :secrets_ttl, Confex.get_env(:ael_api, :secrets_ttl))
-    Registry.register(Ael.Registry, :known_buckets, Confex.get_env(:ael_api, :known_buckets))
-    Registry.register(Ael.Registry, :object_storage_backend, Confex.get_env(:ael_api, :object_storage_backend))
-    Registry.register(Ael.Registry, :swift_endpoint, Confex.get_env(:ael_api, :swift_endpoint))
-    Registry.register(Ael.Registry, :swift_tenant_id, Confex.get_env(:ael_api, :swift_tenant_id))
-    Registry.register(Ael.Registry, :swift_temp_url_key, Confex.get_env(:ael_api, :swift_temp_url_key))
+    Registry.register(Ael.Registry, :secrets_ttl, Application.get_env(:ael_api, :secrets_ttl))
+    Registry.register(Ael.Registry, :known_buckets, Application.get_env(:ael_api, :known_buckets))
+    Registry.register(Ael.Registry, :object_storage_backend, Application.get_env(:ael_api, :object_storage_backend))
+    Registry.register(Ael.Registry, :swift_endpoint, Application.get_env(:ael_api, :swift_endpoint))
+    Registry.register(Ael.Registry, :swift_tenant_id, Application.get_env(:ael_api, :swift_tenant_id))
+    Registry.register(Ael.Registry, :swift_temp_url_key, Application.get_env(:ael_api, :swift_temp_url_key))
   end
 
   def load_gcs_service_config do
     :ael_api
-    |> Confex.get_env(:google_cloud_storage)
-    |> Keyword.get(:service_account_key_path)
+    |> Application.get_env(:google_cloud_storage)
     |> File.read!()
     |> Poison.decode!()
-  end
-
-  # Loads configuration in `:on_init` callbacks and replaces `{:system, ..}` tuples via Confex
-  @doc false
-  def load_from_system_env(config) do
-    {:ok, Resolver.resolve!(config)}
   end
 end

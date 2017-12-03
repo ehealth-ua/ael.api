@@ -91,13 +91,13 @@ defmodule Ael.Secrets.API do
   end
 
   def put_secret_url(%Secret{action: action} = secret, "s3") do
-    url = System.get_env("MINIO_ENDPOINT") <> get_canonicalized_resource(secret)
+    url = Application.get_env(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
     config = %{
-      access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
-      secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
-      region: System.get_env("AWS_REGION")
+      access_key_id: Application.get_env(:ael_api, :access_key_id),
+      secret_access_key: Application.get_env(:ael_api, :secret_access_key),
+      region: Application.get_env(:ael_api, :region)
     }
 
     {:ok, secret_url} =
@@ -158,7 +158,7 @@ defmodule Ael.Secrets.API do
     |> cast(attrs, @secret_attrs)
     |> validate_required(@required_secret_attrs)
     |> validate_inclusion(:action, @verbs)
-    |> validate_inclusion(:bucket, get_from_registry(:known_buckets))
+    |> validate_inclusion(:bucket, known_buckets())
   end
 
   defp validation_changeset(%Validator{} = validator, attrs) do
@@ -187,5 +187,9 @@ defmodule Ael.Secrets.API do
     changeset
     |> Changeset.get_change(:url)
     |> HTTPoison.get
+  end
+
+  def known_buckets do
+    String.split(get_from_registry(:known_buckets), ",", trim: true)
   end
 end
