@@ -1,7 +1,13 @@
-Change log for versions 1.34.0 - 1.34.3
+Change log for versions 1.34.0 - 1.34.4
 
 **Other**:
 
+Cleanup mix.exs
+Cleanup readme
+More cleanups
+- Cleanup configs a little more
+- Remove old files
+- Remove LOG_LEVEL references
 Remove confex
 Also, revise configs
 Improve code formatting
