@@ -1,32 +1,4 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
-
-# This configuration is loaded before any dependency and is restricted
-# to this project. If another project depends on this project, this
-# file won't be loaded nor affect the parent project. For this reason,
-# if you want to provide default values for your application for
-# 3rd-party users, it should be done in your "mix.exs" file.
-
-# You can configure for your application as:
-#
-#     config :ael_api, key: :value
-#
-# And access this configuration in your application as:
-#
-#     Application.get_env(:ael_api, :key)
-#
-# Or configure a 3rd-party app:
-#
-#     config :logger, level: :info
-#
-# Or read environment variables in runtime (!) as:
-#
-#     :var_name, "${ENV_VAR_NAME}"
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 
 config :ael_api,
   namespace: Ael
@@ -44,30 +16,16 @@ config :logger, :console,
   level: :info
 
 config :ael_api,
-  known_buckets: {:system, :list, "KNOWN_BUCKETS", []},
-  secrets_ttl: {:system, :integer, "SECRETS_TTL", 600} # seconds
+  known_buckets: "declarations-dev, legal-entities-dev",
+  secrets_ttl: 600, # seconds
+  swift_endpoint: "set_swift_enpoint",
+  swift_tenant_id: "set_swift_tenant_id",
+  swift_temp_url_key: "set_swift_temp_url_key",
+  object_storage_backend: "gcs",
+  minio_endpoint: System.get_env("MINIO_ENDPOINT"),
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY"),
+  region: System.get_env("AWS_REGION"),
+  google_cloud_storage: "priv/service_account_key.json"
 
-# Configures Digital Signature API
-config :ael_api, Ael.API.Signature,
-  endpoint: {:system, "DIGITAL_SIGNATURE_ENDPOINT", "http://35.187.186.145"},
-  timeouts: [
-    connect_timeout: {:system, :integer, "DIGITAL_SIGNATURE_REQUEST_TIMEOUT", 30_000},
-    recv_timeout: {:system, :integer, "DIGITAL_SIGNATURE_REQUEST_TIMEOUT", 30_000},
-    timeout: {:system, :integer, "DIGITAL_SIGNATURE_REQUEST_TIMEOUT", 30_000}
-  ]
-
-config :ael_api, :google_cloud_storage,
-  service_account_key_path: {:system, "SERVICE_ACCOUNT_KEY_PATH", "priv/service_account_key.json"}
-
-config :ael_api, :swift_endpoint, {:system, "SWIFT_ENDPOINT", "set_swift_enpoint"}
-config :ael_api, :swift_tenant_id, {:system, "SWIFT_TENANT_ID", "set_swift_tenant_id"}
-config :ael_api, :swift_temp_url_key, {:system, "SWIFT_TEMP_URL_KEY", "set_swift_temp_url_key"}
-config :ael_api, :object_storage_backend, {:system, "OBJECT_STORAGE_BACKEND", "set_object_storage_backend"}
-
-# It is also possible to import configuration files, relative to this
-# directory. For example, you can emulate configuration per environment
-# by uncommenting the line below and defining dev.exs, test.exs and such.
-# Configuration from the imported file will override the ones defined
-# here (which is why it is important to import them last).
-#
 import_config "#{Mix.env}.exs"
