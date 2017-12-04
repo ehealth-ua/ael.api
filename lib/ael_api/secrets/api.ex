@@ -51,7 +51,7 @@ defmodule Ael.Secrets.API do
     expires_at =
       now
       |> DateTime.to_unix()
-      |> Kernel.+(get_from_registry(:secrets_ttl))
+      |> Kernel.+(String.to_integer(get_from_registry(:secrets_ttl)))
       |> DateTime.from_unix!()
       |> DateTime.to_iso8601()
 
