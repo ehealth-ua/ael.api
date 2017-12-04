@@ -17,7 +17,7 @@ config :logger, :console,
 
 config :ael_api,
   known_buckets: "declarations-dev, legal-entities-dev",
-  secrets_ttl: 600, # seconds
+  secrets_ttl: "600", # seconds
   swift_endpoint: "set_swift_enpoint",
   swift_tenant_id: "set_swift_tenant_id",
   swift_temp_url_key: "set_swift_temp_url_key",
