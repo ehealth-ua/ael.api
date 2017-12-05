@@ -190,6 +190,9 @@ defmodule Ael.Secrets.API do
   end
 
   def known_buckets do
-    String.split(get_from_registry(:known_buckets), ",", trim: true)
+    :known_buckets
+    |> get_from_registry()
+    |> String.split(",")
+    |> Enum.map(&String.trim/1)
   end
 end
