@@ -1,0 +1,6 @@
+Change log for versions 1.36.0 - 1.36.1
+
+**Other**:
+
+mix format, skip tests with Minio EP
+API link updated
