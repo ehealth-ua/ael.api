@@ -35,6 +35,7 @@ defmodule Ael.Secrets.API do
     case changeset do
       %Changeset{valid?: false} = changeset ->
         {:error, changeset}
+
       %Changeset{valid?: true} = changeset ->
         secret =
           changeset
@@ -48,6 +49,7 @@ defmodule Ael.Secrets.API do
 
   defp put_timestamps(%Secret{} = secret) do
     now = DateTime.utc_now()
+
     expires_at =
       now
       |> DateTime.to_unix()
@@ -63,27 +65,31 @@ defmodule Ael.Secrets.API do
   def put_secret_url(%Secret{action: action, expires_at: expires_at, content_type: content_type} = secret, "gcs") do
     canonicalized_resource = get_canonicalized_resource(secret)
     expires_at = iso8601_to_unix(expires_at)
+
     signature =
       action
       |> string_to_sign(expires_at, content_type, canonicalized_resource, "gcs")
       |> base64_sign()
 
     secret
-    |> Map.put(:secret_url, "https://storage.googleapis.com#{canonicalized_resource}" <>
-                            "?GoogleAccessId=#{get_from_registry(:gcs_service_account_id)}" <>
-                            "&Expires=#{expires_at}" <>
-                            "&Signature=#{signature}")
+    |> Map.put(
+      :secret_url,
+      "https://storage.googleapis.com#{canonicalized_resource}" <>
+        "?GoogleAccessId=#{get_from_registry(:gcs_service_account_id)}" <>
+        "&Expires=#{expires_at}" <> "&Signature=#{signature}"
+    )
   end
 
   def put_secret_url(%Secret{action: action, expires_at: expires_at} = secret, "swift") do
     canonicalized_resource = get_canonicalized_resource(secret)
     expires_at = iso8601_to_unix(expires_at)
     path = Enum.join(["/v1/", get_from_registry(:swift_tenant_id), canonicalized_resource])
+
     signature =
       action
       |> string_to_sign(expires_at, path, "swift")
       |> hmac_sign(get_from_registry(:swift_temp_url_key))
-      |> String.downcase
+      |> String.downcase()
 
     host = get_from_registry(:swift_endpoint)
 
@@ -94,14 +100,14 @@ defmodule Ael.Secrets.API do
     url = Application.get_env(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
+
     config = %{
       access_key_id: Application.get_env(:ael_api, :access_key_id),
       secret_access_key: Application.get_env(:ael_api, :secret_access_key),
       region: Application.get_env(:ael_api, :region)
     }
 
-    {:ok, secret_url} =
-      Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
+    {:ok, secret_url} = Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
 
     Map.put(secret, :secret_url, secret_url)
   end
@@ -135,17 +141,17 @@ defmodule Ael.Secrets.API do
   def validate_entity(params) do
     with %Ecto.Changeset{valid?: true} = changeset <- validation_changeset(%Validator{}, params),
          {:ok, %HTTPoison.Response{body: body}} <- get_signed_content(changeset),
-         {:ok, %{"data" => %{"is_valid" => true, "content" => content}}} <- validate_signed_content(body)
-    do
+         {:ok, %{"data" => %{"is_valid" => true, "content" => content}}} <- validate_signed_content(body) do
       {:ok, validate_rules(content, Changeset.apply_changes(changeset))}
     else
       # False in all other cases
-      _ -> {:ok, false}
+      _ ->
+        {:ok, false}
     end
   end
 
   defp get_canonicalized_resource(%Secret{bucket: bucket, resource_id: resource_id, resource_name: resource_name})
-    when is_binary(resource_name) and resource_name != "" do
+       when is_binary(resource_name) and resource_name != "" do
     "/#{bucket}/#{resource_id}/#{resource_name}"
   end
 
@@ -173,6 +179,7 @@ defmodule Ael.Secrets.API do
       case rule do
         %{"type" => "eq", "field" => field, "value" => value} ->
           to_string(get_in(content, field)) == to_string(value)
+
         _ ->
           true
       end
@@ -186,7 +193,7 @@ defmodule Ael.Secrets.API do
   defp get_signed_content(changeset) do
     changeset
     |> Changeset.get_change(:url)
-    |> HTTPoison.get
+    |> HTTPoison.get()
   end
 
   def known_buckets do

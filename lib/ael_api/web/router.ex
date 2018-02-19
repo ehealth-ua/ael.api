@@ -14,16 +14,16 @@ defmodule Ael.Web.Router do
   require Logger
 
   pipeline :api do
-    plug :accepts, ["json"]
-    plug :put_secure_browser_headers
-    plug EView
+    plug(:accepts, ["json"])
+    plug(:put_secure_browser_headers)
+    plug(EView)
   end
 
   scope "/", Ael.Web do
-    pipe_through :api
+    pipe_through(:api)
 
-    post "/media_content_storage_secrets", SecretController, :create
-    post "/validate_signed_entity", SecretController, :validate
+    post("/media_content_storage_secrets", SecretController, :create)
+    post("/validate_signed_entity", SecretController, :validate)
   end
 
   defp handle_errors(%Plug.Conn{status: 500} = conn, %{kind: kind, reason: reason, stack: stacktrace}) do

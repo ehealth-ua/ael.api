@@ -1,7 +1,6 @@
 use Mix.Config
 
-config :ael_api,
-  namespace: Ael
+config :ael_api, namespace: Ael
 
 # Configures the endpoint
 config :ael_api, Ael.Web.Endpoint,
@@ -17,7 +16,8 @@ config :logger, :console,
 
 config :ael_api,
   known_buckets: "declarations-dev, legal-entities-dev",
-  secrets_ttl: "600", # seconds
+  # seconds
+  secrets_ttl: "600",
   swift_endpoint: "set_swift_enpoint",
   swift_tenant_id: "set_swift_tenant_id",
   swift_temp_url_key: "set_swift_temp_url_key",
@@ -28,4 +28,4 @@ config :ael_api,
   region: System.get_env("AWS_REGION"),
   google_cloud_storage: "priv/service_account_key.json"
 
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

@@ -10,9 +10,9 @@ defmodule Ael.Mixfile do
       package: package(),
       version: @version,
       elixir: "~> 1.5",
-      elixirc_paths: elixirc_paths(Mix.env),
-      build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [coveralls: :test]
@@ -20,13 +20,12 @@ defmodule Ael.Mixfile do
   end
 
   def application do
-    [extra_applications: [:logger, :runtime_tools, :crypto, :public_key],
-     mod: {Ael, []}]
+    [extra_applications: [:logger, :runtime_tools, :crypto, :public_key], mod: {Ael, []}]
   end
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   defp deps do
     [
@@ -42,7 +41,6 @@ defmodule Ael.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:ex_aws, "~> 2.0"},
       {:excoveralls, ">= 0.5.0", only: [:dev, :test]},
-      {:dogma, ">= 0.1.12", only: [:dev, :test]},
       {:credo, ">= 0.5.1", only: [:dev, :test]}
     ]
   end

@@ -9,13 +9,15 @@ defmodule Ael.Web.SecretView do
   end
 
   def render("secret.json", %{secret: secret}) do
-    %{action: secret.action,
+    %{
+      action: secret.action,
       bucket: secret.bucket,
       resource_id: secret.resource_id,
       resource_name: secret.resource_name,
       secret_url: secret.secret_url,
       expires_at: secret.expires_at,
-      inserted_at: secret.inserted_at}
+      inserted_at: secret.inserted_at
+    }
   end
 
   def render("validator.json", %{is_valid: is_valid}) do

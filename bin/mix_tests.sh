@@ -2,7 +2,7 @@
 # cd $TRAVIS_BUILD_DIR
 # Run all tests except pending ones
 echo "- mix test --exclude pending --trace "
-mix do test --exclude pending --trace, credo --strict --color, dogma
+mix test --exclude pending --trace
 
 if [ "$?" -eq 0 ]; then
   echo "mix test successfully completed"
@@ -31,17 +31,6 @@ if [ "$?" -eq 0 ]; then
   echo "mix credo successfully completed"
 else
   echo "mix credo finished with errors, exited with 1"
-  mix_test=1
-fi;
-
-# Check code style
-echo "- mix dogma;"
-mix dogma
-
-if [ "$?" -eq 0 ]; then
-  echo "mix dogma successfully completed"
-else
-  echo "mix dogma finished with errors, exited with 1"
   mix_test=1
 fi;
 

@@ -14,7 +14,7 @@ defmodule Ael do
     children = [
       # Start the endpoint when the application starts
       supervisor(Ael.Web.Endpoint, []),
-      supervisor(Registry, [:unique, Ael.Registry]),
+      supervisor(Registry, [:unique, Ael.Registry])
       # Starts a worker by calling: Ael.Worker.start_link(arg1, arg2, arg3)
       # worker(Ael.Worker, [arg1, arg2, arg3]),
     ]
@@ -39,19 +39,17 @@ defmodule Ael do
   def register_gcs_config do
     gcs_service_account = load_gcs_service_config()
 
-    {:PrivateKeyInfo,
-      :v1,
-      {:PrivateKeyInfo_privateKeyAlgorithm, {1, 2, 840, 113_549, 1, 1, 1}, {:asn1_OPENTYPE, <<5, 0>>}},
-      der,
-      :asn1_NOVALUE} =
+    {:PrivateKeyInfo, :v1,
+     {:PrivateKeyInfo_privateKeyAlgorithm, {1, 2, 840, 113_549, 1, 1, 1}, {:asn1_OPENTYPE, <<5, 0>>}}, der,
+     :asn1_NOVALUE} =
       gcs_service_account
       |> Map.get("private_key")
-      |> :public_key.pem_decode
-      |> List.first
-      |> :public_key.pem_entry_decode
+      |> :public_key.pem_decode()
+      |> List.first()
+      |> :public_key.pem_entry_decode()
 
     Registry.register(Ael.Registry, :gcs_service_account_id, Map.get(gcs_service_account, "client_email"))
-    Registry.register(Ael.Registry, :gcs_service_account_key, :public_key.der_decode(:'RSAPrivateKey', der))
+    Registry.register(Ael.Registry, :gcs_service_account_key, :public_key.der_decode(:RSAPrivateKey, der))
     Registry.register(Ael.Registry, :secrets_ttl, Application.get_env(:ael_api, :secrets_ttl))
     Registry.register(Ael.Registry, :known_buckets, Application.get_env(:ael_api, :known_buckets))
     Registry.register(Ael.Registry, :object_storage_backend, Application.get_env(:ael_api, :object_storage_backend))
