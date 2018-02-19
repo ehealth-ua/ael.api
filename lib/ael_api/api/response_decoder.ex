@@ -1,5 +1,4 @@
 defmodule Ael.API.ResponseDecoder do
-
   @moduledoc """
   HTTPPoison JSON to Elixir data decoder and formatter
   """
@@ -20,10 +19,11 @@ defmodule Ael.API.ResponseDecoder do
   def map_response({:error, body}, type), do: {type, body}
 
   def decode_response(""), do: {:ok, ""}
+
   def decode_response(response) do
     case Poison.decode(response) do
-       {:ok, body} -> {:ok, body}
-       _           -> {:error, {:response_json_decoder, response}}
-     end
+      {:ok, body} -> {:ok, body}
+      _ -> {:error, {:response_json_decoder, response}}
+    end
   end
 end

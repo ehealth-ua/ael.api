@@ -7,8 +7,7 @@ config :ael_api, Ael.Web.Endpoint,
   code_reloader: false
 
 # Configures Digital Signature API
-config :ael_api, Ael.API.Signature,
-  endpoint: "${DIGITAL_SIGNATURE_ENDPOINT}"
+config :ael_api, Ael.API.Signature, endpoint: "${DIGITAL_SIGNATURE_ENDPOINT}"
 
 config :ael_api,
   known_buckets: "${KNOWN_BUCKETS}",

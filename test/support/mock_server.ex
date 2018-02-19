@@ -3,33 +3,41 @@ defmodule Ael.MockServer do
 
   use Plug.Router
 
-  plug :match
-  plug :dispatch
+  plug(:match)
+  plug(:dispatch)
 
   get "/declaration_signed_content" do
-    Plug.Conn.send_resp(conn, 200, Poison.encode!(%{
-      "data" => %{
-        "content" => %{
-          "legal_entity" => %{
-            "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
-          }
-        },
-      "is_valid" => true
-      },
-    }))
+    Plug.Conn.send_resp(
+      conn,
+      200,
+      Poison.encode!(%{
+        "data" => %{
+          "content" => %{
+            "legal_entity" => %{
+              "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
+            }
+          },
+          "is_valid" => true
+        }
+      })
+    )
   end
 
   get "/declaration_signed_content_not_valid" do
-    Plug.Conn.send_resp(conn, 200, Poison.encode!(%{
-      "data" => %{
-        "content" => %{
-          "legal_entity" => %{
-            "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
-          }
-        },
-      "is_valid" => false
-      },
-    }))
+    Plug.Conn.send_resp(
+      conn,
+      200,
+      Poison.encode!(%{
+        "data" => %{
+          "content" => %{
+            "legal_entity" => %{
+              "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
+            }
+          },
+          "is_valid" => false
+        }
+      })
+    )
   end
 
   post "/digital_signatures" do

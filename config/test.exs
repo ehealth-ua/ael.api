@@ -13,10 +13,12 @@ config :ael_api, Ael.Web.Endpoint,
 config :logger, level: :warn
 
 # Run acceptance test in concurrent mode
-config :ael_api, sql_sandbox: true
-
-config :ael_api, mock: [port: 4040]
+config :ael_api,
+  sql_sandbox: true,
+  mock: [port: 4040],
+  minio_endpoint: "",
+  access_key_id: "",
+  secret_access_key: ""
 
 # Configures Digital Signature API
-config :ael_api, Ael.API.Signature,
-  endpoint: "http://localhost:4040"
+config :ael_api, Ael.API.Signature, endpoint: "http://localhost:4040"

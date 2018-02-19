@@ -9,11 +9,12 @@ defmodule Ael.Secrets.Validator do
 
   @primary_key false
   embedded_schema do
-    field :url, :string
+    field(:url, :string)
+
     embeds_many :rules, Rule, primary_key: false do
-      field :field, {:array, :string}
-      field :type, :string
-      field :value, :string
+      field(:field, {:array, :string})
+      field(:type, :string)
+      field(:value, :string)
     end
   end
 

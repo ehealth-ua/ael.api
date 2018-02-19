@@ -5,7 +5,7 @@ defmodule Ael.Web.SecretController do
   alias Ael.Secrets.Secret
   alias Ael.Utils
 
-  action_fallback Ael.Web.FallbackController
+  action_fallback(Ael.Web.FallbackController)
 
   def create(conn, %{"secret" => secret_params}) do
     backend = Utils.get_from_registry(:object_storage_backend)
