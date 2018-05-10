@@ -17,7 +17,25 @@ defmodule Ael.MockServer do
               "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
             }
           },
-          "is_valid" => true
+          "signatures" => [
+            %{
+              "is_valid" => true,
+              "signer" => %{
+                "common_name" => "Some Common Name",
+                "country_name" => "UA",
+                "drfo" => "1234567890",
+                "edrpou" => "",
+                "given_name" => "Some Name",
+                "locality_name" => "Kyiv",
+                "organization_name" => "",
+                "organizational_unit_name" => "",
+                "state_or_province_name" => "Kyiv",
+                "surname" => "Some",
+                "title" => ""
+              },
+              "validation_error_message" => ""
+            }
+          ]
         }
       })
     )
@@ -34,7 +52,25 @@ defmodule Ael.MockServer do
               "id" => "1bce381a-7b82-11e7-bb31-be2e44b06b34"
             }
           },
-          "is_valid" => false
+          "signatures" => [
+            %{
+              "is_valid" => false,
+              "signer" => %{
+                "common_name" => "Some Common Name",
+                "country_name" => "UA",
+                "drfo" => "1234567890",
+                "edrpou" => "",
+                "given_name" => "Some Name",
+                "locality_name" => "Kyiv",
+                "organization_name" => "",
+                "organizational_unit_name" => "",
+                "state_or_province_name" => "Kyiv",
+                "surname" => "Some",
+                "title" => ""
+              },
+              "validation_error_message" => "not valid"
+            }
+          ]
         }
       })
     )
