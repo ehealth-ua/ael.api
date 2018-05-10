@@ -141,7 +141,7 @@ defmodule Ael.Secrets.API do
   def validate_entity(params) do
     with %Ecto.Changeset{valid?: true} = changeset <- validation_changeset(%Validator{}, params),
          {:ok, %HTTPoison.Response{body: body}} <- get_signed_content(changeset),
-         {:ok, %{"data" => %{"is_valid" => true, "content" => content}}} <- validate_signed_content(body) do
+         {:ok, content} <- validate_signed_content(body) do
       {:ok, validate_rules(content, Changeset.apply_changes(changeset))}
     else
       # False in all other cases
@@ -187,8 +187,23 @@ defmodule Ael.Secrets.API do
   end
 
   defp validate_signed_content(body) do
-    Signature.decode_and_validate(Base.encode64(body), "base64")
+    with {:ok, %{"data" => data}} <- Signature.decode_and_validate(Base.encode64(body), "base64"),
+         do: do_validate_signed_content(data)
   end
+
+  defp do_validate_signed_content(%{"content" => content, "signatures" => [%{"is_valid" => true}]}), do: {:ok, content}
+
+  defp do_validate_signed_content(%{"signatures" => [%{"is_valid" => false, "validation_error_message" => error}]}),
+    do: {:error, add_error(%Changeset{}, :digital_signature, error)}
+
+  defp do_validate_signed_content(%{"signatures" => signatures}) when is_list(signatures),
+    do:
+      {:error,
+       add_error(
+         %Changeset{},
+         :digital_signature,
+         "document must be signed by 1 signer but contains #{Enum.count(signatures)} signatures"
+       )}
 
   defp get_signed_content(changeset) do
     changeset
