@@ -15,7 +15,7 @@ defmodule Ael.Secrets.API do
   @required_secret_attrs ~w(action bucket resource_id)a
   @validator_attrs ~w(url)a
   @required_validator_attrs ~w(url)a
-  @verbs ~w(PUT GET HEAD)
+  @verbs ~w(PUT GET HEAD DELETE)
 
   @doc """
   Creates a secret.
