@@ -1,7 +1,7 @@
 defmodule Ael.Mixfile do
   use Mix.Project
 
-  @version "1.38.0"
+  @version "1.39.0"
 
   def project do
     [
