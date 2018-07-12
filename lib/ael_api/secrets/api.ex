@@ -96,8 +96,8 @@ defmodule Ael.Secrets.API do
     Map.put(secret, :secret_url, "#{host}#{path}?temp_url_sig=#{signature}&temp_url_expires=#{expires_at}")
   end
 
-  def put_secret_url(%Secret{action: action} = secret, "s3") do
-    url = Application.get_env(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
+  def put_secret_url(%Secret{action: "PUT"} = secret, "s3") do
+    url = Application.get_env(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
 
@@ -107,9 +107,61 @@ defmodule Ael.Secrets.API do
       region: Application.get_env(:ael_api, :region)
     }
 
-    {:ok, secret_url} = Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
-
+    {:ok, secret_url} = Auth.presigned_url(String.to_atom("PUT"), url, :s3, now, config, ttl)
     Map.put(secret, :secret_url, secret_url)
+  end
+
+  def put_secret_url(%Secret{action: action} = secret, "s3") do
+    # check old minio endpoint first
+    url = Application.get_env(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
+
+    now = NaiveDateTime.to_erl(DateTime.utc_now())
+    ttl = get_from_registry(:secrets_ttl)
+
+    config = %{
+      access_key_id: Application.get_env(:ael_api, :access_key_id),
+      secret_access_key: Application.get_env(:ael_api, :secret_access_key),
+      region: Application.get_env(:ael_api, :region)
+    }
+
+    {:ok, secret_url} = Auth.presigned_url(String.to_atom("HEAD"), url, :s3, now, config, ttl)
+
+    case HTTPoison.head(secret_url, "Content-Type": MIME.from_path(secret.resource_name)) do
+      # object exists at old endpoint
+      {:ok, %HTTPoison.Response{status_code: 200}} ->
+        {:ok, secret_url} = Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
+        Map.put(secret, :secret_url, secret_url)
+
+      _ ->
+        url = Application.get_env(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
+        now = NaiveDateTime.to_erl(DateTime.utc_now())
+        ttl = get_from_registry(:secrets_ttl)
+
+        config = %{
+          access_key_id: Application.get_env(:ael_api, :access_key_id),
+          secret_access_key: Application.get_env(:ael_api, :secret_access_key),
+          region: Application.get_env(:ael_api, :region)
+        }
+
+        {:ok, secret_url} = Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
+        Map.put(secret, :secret_url, secret_url)
+    end
+  end
+
+  defp get_directory_structure(%Secret{bucket: bucket, resource_id: resource_id, resource_name: resource_name})
+       when is_binary(resource_name) and resource_name != "" do
+    "/#{bucket}/#{get_resource_prefix(resource_id)}/#{resource_id}/#{resource_name}"
+  end
+
+  defp get_directory_structure(%Secret{bucket: bucket, resource_id: resource_id}) do
+    "/#{bucket}/#{get_resource_prefix(resource_id)}/#{resource_id}"
+  end
+
+  defp get_resource_prefix(id) do
+    id
+    |> String.split("-")
+    |> Enum.map(&String.slice(&1, 0, 2))
+    |> Enum.join("/")
   end
 
   def string_to_sign(action, expires_at, content_type, canonicalized_resource, "gcs") do
