@@ -3,10 +3,10 @@ defmodule Ael.Secrets.API do
   The boundary for the Secrets system.
   """
   import Ecto.Changeset, warn: false
-  alias Ecto.Changeset
   alias Ael.API.Signature
   alias Ael.Secrets.Secret
   alias Ael.Secrets.Validator
+  alias Ecto.Changeset
   alias ExAws.Auth
 
   import Ael.Utils, only: [get_from_registry: 1]

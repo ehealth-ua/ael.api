@@ -120,6 +120,7 @@ defmodule Ael.Secrets.APITest do
       {"Cache-Control", "no-cache"},
       {"Content-Type", ""}
     ]
+
     %HTTPoison.Response{body: _, status_code: code} = HTTPoison.put!(secret.secret_url, {:file, file_path}, headers)
 
     assert 201 == code
