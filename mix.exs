@@ -28,7 +28,7 @@ defmodule Ael.Mixfile do
 
   defp deps do
     [
-      {:distillery, "~> 1.4.0", runtime: false},
+      {:distillery, "~> 2.0", runtime: false},
       {:poison, "~> 3.1"},
       {:cowboy, "~> 1.1"},
       {:httpoison, ">= 0.0.0"},

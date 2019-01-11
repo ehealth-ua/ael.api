@@ -50,3 +50,4 @@ uploads/
 
 # Don't publish development secrets
 priv/service_account_key.json
+.elixir_ls
