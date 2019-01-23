@@ -1,8 +1,10 @@
 defmodule Ael.Mixfile do
   use Mix.Project
 
+  @version "1.39.1"
   def project do
     [
+      version: @version,
       app: :ael_api,
       description: "Media content storage access control system.",
       package: package(),
@@ -40,7 +42,8 @@ defmodule Ael.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:ex_aws, "~> 2.0"},
       {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
-      {:credo, "~> 0.9.3", only: [:dev, :test]}
+      {:credo, "~> 0.9.3", only: [:dev, :test]},
+      {:git_ops, "~> 0.6.0", only: [:dev]}
     ]
   end
 
