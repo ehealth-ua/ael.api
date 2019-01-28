@@ -1,18 +1,12 @@
+# This file is responsible for configuring your application
+# and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
 
-config :ael_api, namespace: Ael
-
-# Configures the endpoint
-config :ael_api, Ael.Web.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "b9WHCgR5TGcrSnd0TNihII7przcYtrVPnSw4ZAXtHOjAVCLZJDb20CQ0ZP65/xbw",
-  render_errors: [view: EView.Views.PhoenixError, accepts: ~w(json)]
-
-# Configures Elixir's Logger
-config :logger, :console,
-  format: "$message\n",
-  handle_otp_reports: true,
-  level: :info
+# By default, the umbrella project as well as each child
+# application will require this configuration file, ensuring
+# they all use the same configuration. While one could
+# configure all applications here, we prefer to delegate
+# back to each application for organization purposes.
 
 config :ael_api,
   known_buckets: "declarations-dev, legal-entities-dev",
@@ -29,4 +23,27 @@ config :ael_api,
   region: System.get_env("AWS_REGION"),
   google_cloud_storage: "priv/service_account_key.json"
 
-import_config "#{Mix.env()}.exs"
+config :git_ops,
+  mix_project: AelApi.MixProject,
+  changelog_file: "CHANGELOG.md",
+  repository_url: "https://github.com/edenlabllc/ael.api/",
+  types: [
+    # Makes an allowed commit type called `tidbit` that is not
+    # shown in the changelog
+    tidbit: [
+      hidden?: true
+    ],
+    # Makes an allowed commit type called `important` that gets
+    # a section in the changelog with the header "Important Changes"
+    important: [
+      header: "Important Changes"
+    ]
+  ],
+  # Instructs the tool to manage your mix version in your `mix.exs` file
+  # See below for more information
+  manage_mix_version?: true,
+  # Instructs the tool to manage the version in your README.md
+  # Pass in `true` to use `"README.md"` or a string to customize
+  manage_readme_version: "README.md"
+
+import_config "../apps/*/config/config.exs"
