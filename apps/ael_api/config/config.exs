@@ -1,6 +1,22 @@
 use Mix.Config
 
-config :ael_api, namespace: Ael
+config :ael_api,
+  namespace: Ael,
+  known_buckets: {:system, "KNOWN_BUCKETS", "declarations-dev, legal-entities-dev"},
+  # seconds
+  secrets_ttl: {:system, "SECRETS_TTL", "600"},
+  swift_endpoint: {:system, "SWIFT_ENDPOINT", "set_swift_enpoint"},
+  swift_tenant_id: {:system, "SWIFT_TENANT_ID", "set_swift_tenant_id"},
+  swift_temp_url_key: {:system, "SWIFT_TEMP_URL_KEY", "set_swift_temp_url_key"},
+  object_storage_backend: {:system, "OBJECT_STORAGE_BACKEND", "gcs"},
+  minio_endpoint: {:system, "MINIO_ENDPOINT", nil},
+  new_minio_endpoint: {:system, "NEW_MINIO_ENDPOINT", nil},
+  access_key_id: {:system, "AWS_ACCESS_KEY_ID", nil},
+  secret_access_key: {:system, "AWS_SECRET_ACCESS_KEY", nil},
+  region: {:system, "AWS_REGION", nil},
+  google_cloud_storage: {:system, "SERVICE_ACCOUNT_KEY_PATH", "priv/service_account_key.json"}
+
+config :ael_api, Ael.API.Signature, endpoint: {:system, "DIGITAL_SIGNATURE_ENDPOINT", "http://35.187.186.145"}
 
 # Configures the endpoint
 config :ael_api, Ael.Web.Endpoint,
