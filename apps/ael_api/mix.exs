@@ -7,7 +7,7 @@ defmodule Ael.Mixfile do
       app: :ael_api,
       description: "Media content storage access control system.",
       package: package(),
-      elixir: "~> 1.7",
+      elixir: "~> 1.8.1",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",

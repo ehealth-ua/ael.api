@@ -5,22 +5,14 @@ defmodule Ael do
   use Application
   alias Ael.Web.Endpoint
 
-  # See http://elixir-lang.org/docs/stable/elixir/Application.html
-  # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
-    # Define workers and child supervisors to be supervised
     children = [
-      # Start the endpoint when the application starts
       supervisor(Ael.Web.Endpoint, []),
       supervisor(Registry, [:unique, Ael.Registry])
-      # Starts a worker by calling: Ael.Worker.start_link(arg1, arg2, arg3)
-      # worker(Ael.Worker, [arg1, arg2, arg3]),
     ]
 
-    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Ael.Supervisor]
 
     application = Supervisor.start_link(children, opts)
