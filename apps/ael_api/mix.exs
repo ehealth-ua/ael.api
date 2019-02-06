@@ -32,6 +32,8 @@ defmodule Ael.Mixfile do
 
   defp deps do
     [
+      {:confex_config_provider, "~> 0.1.0"},
+      {:confex, "~> 3.3"},
       {:poison, "~> 3.1"},
       {:cowboy, "~> 1.1"},
       {:httpoison, ">= 0.0.0"},

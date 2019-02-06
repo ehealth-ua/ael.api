@@ -22,4 +22,6 @@ release :ael_api do
       ael_api: :permanent
     ]
   )
+
+  set(config_providers: [ConfexConfigProvider])
 end

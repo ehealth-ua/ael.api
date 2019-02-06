@@ -97,14 +97,14 @@ defmodule Ael.Secrets.API do
   end
 
   def put_secret_url(%Secret{action: "PUT"} = secret, "s3") do
-    url = Application.get_env(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
+    url = Confex.fetch_env!(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
 
     config = %{
-      access_key_id: Application.get_env(:ael_api, :access_key_id),
-      secret_access_key: Application.get_env(:ael_api, :secret_access_key),
-      region: Application.get_env(:ael_api, :region)
+      access_key_id: Confex.fetch_env!(:ael_api, :access_key_id),
+      secret_access_key: Confex.fetch_env!(:ael_api, :secret_access_key),
+      region: Confex.fetch_env!(:ael_api, :region)
     }
 
     {:ok, secret_url} = Auth.presigned_url(String.to_atom("PUT"), url, :s3, now, config, ttl)
@@ -113,15 +113,15 @@ defmodule Ael.Secrets.API do
 
   def put_secret_url(%Secret{action: action} = secret, "s3") do
     # check old minio endpoint first
-    url = Application.get_env(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
+    url = Confex.fetch_env!(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
 
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
 
     config = %{
-      access_key_id: Application.get_env(:ael_api, :access_key_id),
-      secret_access_key: Application.get_env(:ael_api, :secret_access_key),
-      region: Application.get_env(:ael_api, :region)
+      access_key_id: Confex.fetch_env!(:ael_api, :access_key_id),
+      secret_access_key: Confex.fetch_env!(:ael_api, :secret_access_key),
+      region: Confex.fetch_env!(:ael_api, :region)
     }
 
     {:ok, secret_url} = Auth.presigned_url(String.to_atom("HEAD"), url, :s3, now, config, ttl)
@@ -133,14 +133,14 @@ defmodule Ael.Secrets.API do
         Map.put(secret, :secret_url, secret_url)
 
       _ ->
-        url = Application.get_env(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
+        url = Confex.fetch_env!(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
         now = NaiveDateTime.to_erl(DateTime.utc_now())
         ttl = get_from_registry(:secrets_ttl)
 
         config = %{
-          access_key_id: Application.get_env(:ael_api, :access_key_id),
-          secret_access_key: Application.get_env(:ael_api, :secret_access_key),
-          region: Application.get_env(:ael_api, :region)
+          access_key_id: Confex.fetch_env!(:ael_api, :access_key_id),
+          secret_access_key: Confex.fetch_env!(:ael_api, :secret_access_key),
+          region: Confex.fetch_env!(:ael_api, :region)
         }
 
         {:ok, secret_url} = Auth.presigned_url(String.to_atom(action), url, :s3, now, config, ttl)
