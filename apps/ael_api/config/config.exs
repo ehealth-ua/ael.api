@@ -1,5 +1,7 @@
 use Mix.Config
 
+config :phoenix, :json_library, Jason
+
 config :ael_api,
   namespace: Ael,
   known_buckets: {:system, "KNOWN_BUCKETS", "declarations-dev, legal-entities-dev"},

@@ -35,15 +35,17 @@ defmodule Ael.Mixfile do
       {:confex_config_provider, "~> 0.1.0"},
       {:confex, "~> 3.3"},
       {:poison, "~> 3.1"},
-      {:cowboy, "~> 1.1"},
+      {:plug_cowboy, "~> 2.0"},
+      {:plug, "~> 1.7"},
       {:httpoison, ">= 0.0.0"},
-      {:phoenix, "~> 1.3.3"},
+      {:phoenix, "~> 1.4.0"},
       {:eview, "~> 0.12"},
       {:ecto, "~> 2.1"},
       {:plug_logger_json, "~> 0.5.0"},
       {:ecto_logger_json, "~> 0.1.0"},
       {:phoenix_ecto, "~> 3.2"},
-      {:ex_aws, "~> 2.0"}
+      {:ex_aws, "~> 2.0"},
+      {:jason, "~> 1.0"}
     ]
   end
 
