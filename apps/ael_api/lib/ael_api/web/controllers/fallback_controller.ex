@@ -3,16 +3,20 @@ defmodule Ael.Web.FallbackController do
   This controller should be used as `action_fallback` in rest of controllers to remove duplicated error handling.
   """
   use Ael.Web, :controller
+  alias EView.Views.Error
+  alias EView.Views.ValidationError
 
   def call(conn, {:error, :access_denied}) do
     conn
     |> put_status(:unauthorized)
-    |> render(EView.Views.Error, :"401")
+    |> put_view(Error)
+    |> render(:"401")
   end
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)
-    |> render(EView.Views.ValidationError, :"422", changeset)
+    |> put_view(ValidationError)
+    |> render(:"422", changeset)
   end
 end
