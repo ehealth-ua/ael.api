@@ -41,8 +41,7 @@ defmodule Ael.Mixfile do
       {:phoenix, "~> 1.4.0"},
       {:eview, "~> 0.12"},
       {:ecto, "~> 2.1"},
-      {:plug_logger_json, "~> 0.5.0"},
-      {:ecto_logger_json, "~> 0.1.0"},
+      {:ehealth_logger, git: "https://github.com/edenlabllc/ehealth_logger.git"},
       {:phoenix_ecto, "~> 3.2"},
       {:ex_aws, "~> 2.0"},
       {:jason, "~> 1.0"}
