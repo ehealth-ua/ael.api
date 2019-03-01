@@ -52,6 +52,6 @@ defmodule Ael do
     :ael_api
     |> Confex.fetch_env!(:google_cloud_storage)
     |> File.read!()
-    |> Poison.decode!()
+    |> Jason.decode!()
   end
 end
