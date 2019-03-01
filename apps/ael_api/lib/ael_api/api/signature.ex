@@ -18,7 +18,7 @@ defmodule Ael.API.Signature do
     }
 
     "/digital_signatures"
-    |> post!(Poison.encode!(params), [], @conn_timeouts)
+    |> post!(Jason.encode!(params), [], @conn_timeouts)
     |> ResponseDecoder.check_response()
   end
 end

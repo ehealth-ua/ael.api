@@ -33,18 +33,17 @@ defmodule Ael.Mixfile do
   defp deps do
     [
       {:confex_config_provider, "~> 0.1.0"},
-      {:confex, "~> 3.3"},
-      {:poison, "~> 3.1"},
+      {:confex, "~> 3.4"},
+      {:jason, "~> 1.1"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
       {:httpoison, ">= 0.0.0"},
       {:phoenix, "~> 1.4.0"},
-      {:eview, "~> 0.12"},
-      {:ecto, "~> 2.1"},
+      {:eview, "~> 0.15.0"},
+      {:ecto, "~> 3.0"},
       {:ehealth_logger, git: "https://github.com/edenlabllc/ehealth_logger.git"},
-      {:phoenix_ecto, "~> 3.2"},
-      {:ex_aws, "~> 2.0"},
-      {:jason, "~> 1.0"}
+      {:phoenix_ecto, "~> 4.0"},
+      {:ex_aws, "~> 2.1"}
     ]
   end
 

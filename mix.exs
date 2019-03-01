@@ -21,7 +21,7 @@ defmodule AelApi.MixProject do
     [
       {:distillery, "~> 2.0", runtime: false},
       {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
-      {:credo, "~> 0.9.3", only: [:dev, :test]},
+      {:credo, "~> 0.10.2", only: [:dev, :test]},
       {:git_ops, "~> 0.6.0", only: [:dev]}
     ]
   end

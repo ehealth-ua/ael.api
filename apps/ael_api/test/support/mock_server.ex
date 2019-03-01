@@ -10,7 +10,7 @@ defmodule Ael.MockServer do
     Plug.Conn.send_resp(
       conn,
       200,
-      Poison.encode!(%{
+      Jason.encode!(%{
         "data" => %{
           "content" => %{
             "legal_entity" => %{
@@ -45,7 +45,7 @@ defmodule Ael.MockServer do
     Plug.Conn.send_resp(
       conn,
       200,
-      Poison.encode!(%{
+      Jason.encode!(%{
         "data" => %{
           "content" => %{
             "legal_entity" => %{
@@ -78,7 +78,7 @@ defmodule Ael.MockServer do
 
   post "/digital_signatures" do
     {:ok, body, conn} = Plug.Conn.read_body(conn)
-    body = Poison.decode!(body)
+    body = Jason.decode!(body)
     Plug.Conn.send_resp(conn, 200, Base.decode64!(body["signed_content"]))
   end
 end
