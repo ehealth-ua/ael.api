@@ -24,7 +24,8 @@ config :ael_api, Ael.API.Signature, endpoint: {:system, "DIGITAL_SIGNATURE_ENDPO
 config :ael_api, Ael.Web.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "b9WHCgR5TGcrSnd0TNihII7przcYtrVPnSw4ZAXtHOjAVCLZJDb20CQ0ZP65/xbw",
-  render_errors: [view: EView.Views.PhoenixError, accepts: ~w(json)]
+  render_errors: [view: EView.Views.PhoenixError, accepts: ~w(json)],
+  instrumenters: [LoggerJSON.Phoenix.Instruments]
 
 config :logger_json, :backend,
   formatter: EhealthLogger.Formatter,
