@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [1.41.0](https://github.com/edenlabllc/ael.api/compare/1.40.0...1.41.0) (2019-3-27)
+
+
+
+
+### Features:
+
+* phoenix instruments (#9)
+
 ## [1.40.0](https://github.com/edenlabllc/ael.api/compare/1.39.1...1.40.0) (2019-3-4)
 
 

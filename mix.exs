@@ -1,7 +1,7 @@
 defmodule AelApi.MixProject do
   use Mix.Project
 
-  @version "1.40.0"
+  @version "1.41.0"
 
   def project do
     [
