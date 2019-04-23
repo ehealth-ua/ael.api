@@ -33,6 +33,6 @@ config :logger_json, :backend,
 
 config :logger,
   backends: [LoggerJSON],
-  level: :info
+  level: :error
 
 import_config "#{Mix.env()}.exs"
