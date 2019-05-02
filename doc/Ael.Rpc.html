@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.20.2">
+    <meta name="project" content=" v1.41.0">
+    <title>Ael.Rpc —  v1.41.0</title>
+    <link rel="stylesheet" href="dist/html-d9f58a6320b5bfa6dd77.css" />
+    <script src="dist/sidebar_items-ce184359d5.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/html-d9f58a6320b5bfa6dd77.js"></script>
+    
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
+    <div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="api-reference.html" class="sidebar-projectName">
+      </a>
+      <h2 class="sidebar-projectVersion">
+        v1.41.0
+      </h2>
+    </div>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="app-vsn"> v1.41.0</small>
+Ael.Rpc              </h1>
+
+
+        <section id="moduledoc">
+<p>This module contains functions that are called from other pods via RPC.</p>
+        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:secret/0">secret()</a>
+  </div>
+</div>
+  </div>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#signed_url/1">signed_url(params)</a>
+  </div>
+    <div class="summary-synopsis"><p>Create signed url from params</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types          </h1>
+          <div class="types-list">
+<section class="detail" id="t:secret/0">
+    <div class="detail-header">
+    <a href="#t:secret/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">secret()</span>
+        
+      <div class="specs">
+          <pre>secret() :: %{
+  action: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  bucket: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  expires_at: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  inserted_at: DateTime,
+  resource_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  resource_name: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  secret_url: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()
+}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+          </div>
+        </section>
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="signed_url/1">
+    <div class="detail-header">
+    <a href="#signed_url/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">signed_url(params)</span>
+        
+      <div class="specs">
+          <pre>signed_url(params :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:secret/0">secret</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+<p>Create signed url from params</p>
+<h2 id="signed_url/1-examples" class="section-heading">
+  <a href="#signed_url/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Ael.Rpc</span><span class="o">.</span><span class="n">signed_url</span><span class="p" data-group-id="8817628770-1">(</span><span class="p" data-group-id="8817628770-2">%{</span><span class="w">
+  </span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;bucket&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;content_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;application/pdf&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;resource_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;resource_name&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="w">
+</span><span class="p" data-group-id="8817628770-2">}</span><span class="p" data-group-id="8817628770-1">)</span><span class="w">
+</span><span class="p" data-group-id="8817628770-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="8817628770-4">%{</span><span class="w">
+  </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">expires_at</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2019-05-01T22:38:35Z&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8817628770-5">#</span><span class="nc" data-group-id="8817628770-5">DateTime</span><span class="p" data-group-id="8817628770-5">&lt;</span><span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">35.391988</span><span class="nc">Z</span><span class="p" data-group-id="8817628770-5">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">resource_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">resource_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">secret_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://storage.googleapis.com/declarations-dev/f7f817b2-3134-4625-b87d-e2d7fc8e9b90/signed_content?GoogleAccessId=ael-dev@ehealth-162117.iam.gserviceaccount.com&amp;Expires=1556750315&amp;Signature=LRS1GJxEVeFtGEHicLP02eTyq3QUD4dSwqN9iGKcUzKBdNmmGh50AyreH%2FSsZenZiZmhbjqfMyUGuCZof8Lq59dFe0d3EPJInzxfhuYDKvlVkGjKLCeeVlgJIFY3DCUpZyOMZfEXgZDV1aFYUggBrVCaU3fRDFYR0evs1CXPe3TJYzYqs5B7enNGIG8Z77AWAOUQdASrDzw4ubrB7FKLB6nw9aD7nXa1zC%2F0%2BF6TLMwk6qQlKo4U93CGccPuPfOMeRM6gUYtFWSWELbftMspkNW0qF99lgCJpMNMHEQcNlBotaA4djq19am8SJJkfs1FNRifNgPgbDViOrWXThbhBQ%3D%3D&quot;</span><span class="w">
+</span><span class="p" data-group-id="8817628770-4">}</span><span class="p" data-group-id="8817628770-3">}</span></code></pre>
+  </section>
+</section>
+          </div>
+        </section>
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.20.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  
+  </body>
+</html>
+
