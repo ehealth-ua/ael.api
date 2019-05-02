@@ -8,7 +8,10 @@ defmodule AelApi.MixProject do
       version: @version,
       apps_path: "apps",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      docs: [
+        filter_prefix: "*.Rpc"
+      ]
     ]
   end
 
@@ -22,7 +25,8 @@ defmodule AelApi.MixProject do
       {:distillery, "~> 2.0", runtime: false},
       {:excoveralls, "~> 0.8.1", only: [:dev, :test]},
       {:credo, "~> 0.10.2", only: [:dev, :test]},
-      {:git_ops, "~> 0.6.0", only: [:dev]}
+      {:git_ops, "~> 0.6.0", only: [:dev]},
+      {:ex_doc, "~> 0.20.2", only: :dev, runtime: false}
     ]
   end
 end
