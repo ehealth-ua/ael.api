@@ -44,8 +44,7 @@ defmodule Ael.Mixfile do
       {:ehealth_logger, git: "https://github.com/edenlabllc/ehealth_logger.git"},
       {:phoenix_ecto, "~> 4.0"},
       {:ex_aws, "~> 2.1"},
-      {:kube_rpc, "~> 0.2.0"},
-      {:libcluster, "~> 3.0", git: "https://github.com/AlexKovalevych/libcluster.git", branch: "kube_namespaces"}
+      {:kube_rpc, "~> 0.2.0"}
     ]
   end
 
