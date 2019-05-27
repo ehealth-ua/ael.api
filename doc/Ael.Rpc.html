@@ -8,7 +8,7 @@
     <meta name="project" content=" v1.41.0">
     <title>Ael.Rpc —  v1.41.0</title>
     <link rel="stylesheet" href="dist/html-d9f58a6320b5bfa6dd77.css" />
-    <script src="dist/sidebar_items-ce184359d5.js"></script>
+    <script src="dist/sidebar_items-739784d998.js"></script>
       <script src="docs_config.js"></script>
     <script async src="dist/html-d9f58a6320b5bfa6dd77.js"></script>
     
@@ -88,6 +88,16 @@ Ael.Rpc              </h1>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#t:access/0">access()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:access_option/0">access_option()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#t:secret/0">secret()</a>
   </div>
 </div>
@@ -98,7 +108,7 @@ Ael.Rpc              </h1>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#signed_url/1">signed_url(params)</a>
+    <a href="#signed_url/2">signed_url(params, options \\ [])</a>
   </div>
     <div class="summary-synopsis"><p>Create signed url from params</p></div>
 </div>
@@ -113,6 +123,36 @@ Ael.Rpc              </h1>
             </a>
 Types          </h1>
           <div class="types-list">
+<section class="detail" id="t:access/0">
+    <div class="detail-header">
+    <a href="#t:access/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">access()</span>
+        
+      <div class="specs">
+          <pre>access() :: :public | :internal</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="t:access_option/0">
+    <div class="detail-header">
+    <a href="#t:access_option/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">access_option()</span>
+        
+      <div class="specs">
+          <pre>access_option() :: {:access_type, <a href="#t:access/0">access</a>()}</pre>
+      </div>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
 <section class="detail" id="t:secret/0">
     <div class="detail-header">
     <a href="#t:secret/0" class="detail-link" title="Link to this type">
@@ -146,42 +186,63 @@ Types          </h1>
             </a>
 Functions          </h1>
           <div class="functions-list">
-<section class="detail" id="signed_url/1">
-    <div class="detail-header">
-    <a href="#signed_url/1" class="detail-link" title="Link to this function">
+<section class="detail" id="signed_url/2">
+  
+    <span id="signed_url/1"></span>
+  <div class="detail-header">
+    <a href="#signed_url/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">signed_url(params)</span>
+    <h1 class="signature">signed_url(params, options \\ [])</span>
         
       <div class="specs">
-          <pre>signed_url(params :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: {:ok, <a href="#t:secret/0">secret</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
+          <pre>signed_url(params :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), options :: [<a href="#t:access_option/0">access_option</a>()]) ::
+  {:ok, <a href="#t:secret/0">secret</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}</pre>
       </div>
   </div>
   <section class="docstring">
 <p>Create signed url from params</p>
-<h2 id="signed_url/1-examples" class="section-heading">
-  <a href="#signed_url/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<h2 id="signed_url/2-examples" class="section-heading">
+  <a href="#signed_url/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Examples
 </h2>
 
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Ael.Rpc</span><span class="o">.</span><span class="n">signed_url</span><span class="p" data-group-id="8817628770-1">(</span><span class="p" data-group-id="8817628770-2">%{</span><span class="w">
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Ael.Rpc</span><span class="o">.</span><span class="n">signed_url</span><span class="p" data-group-id="6815419747-1">(</span><span class="p" data-group-id="6815419747-2">%{</span><span class="w">
   </span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
   </span><span class="s">&quot;bucket&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
   </span><span class="s">&quot;content_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;application/pdf&quot;</span><span class="p">,</span><span class="w">
   </span><span class="s">&quot;resource_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
   </span><span class="s">&quot;resource_name&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="w">
-</span><span class="p" data-group-id="8817628770-2">}</span><span class="p" data-group-id="8817628770-1">)</span><span class="w">
-</span><span class="p" data-group-id="8817628770-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
-</span><span class="p" data-group-id="8817628770-4">%{</span><span class="w">
+</span><span class="p" data-group-id="6815419747-2">}</span><span class="p" data-group-id="6815419747-1">)</span><span class="w">
+</span><span class="p" data-group-id="6815419747-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="6815419747-4">%{</span><span class="w">
   </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">expires_at</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2019-05-01T22:38:35Z&quot;</span><span class="p">,</span><span class="w">
-  </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8817628770-5">#</span><span class="nc" data-group-id="8817628770-5">DateTime</span><span class="p" data-group-id="8817628770-5">&lt;</span><span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">35.391988</span><span class="nc">Z</span><span class="p" data-group-id="8817628770-5">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6815419747-5">#</span><span class="nc" data-group-id="6815419747-5">DateTime</span><span class="p" data-group-id="6815419747-5">&lt;</span><span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">35.391988</span><span class="nc">Z</span><span class="p" data-group-id="6815419747-5">&gt;</span><span class="p">,</span><span class="w">
   </span><span class="ss">resource_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">resource_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">secret_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://storage.googleapis.com/declarations-dev/f7f817b2-3134-4625-b87d-e2d7fc8e9b90/signed_content?GoogleAccessId=ael-dev@ehealth-162117.iam.gserviceaccount.com&amp;Expires=1556750315&amp;Signature=LRS1GJxEVeFtGEHicLP02eTyq3QUD4dSwqN9iGKcUzKBdNmmGh50AyreH%2FSsZenZiZmhbjqfMyUGuCZof8Lq59dFe0d3EPJInzxfhuYDKvlVkGjKLCeeVlgJIFY3DCUpZyOMZfEXgZDV1aFYUggBrVCaU3fRDFYR0evs1CXPe3TJYzYqs5B7enNGIG8Z77AWAOUQdASrDzw4ubrB7FKLB6nw9aD7nXa1zC%2F0%2BF6TLMwk6qQlKo4U93CGccPuPfOMeRM6gUYtFWSWELbftMspkNW0qF99lgCJpMNMHEQcNlBotaA4djq19am8SJJkfs1FNRifNgPgbDViOrWXThbhBQ%3D%3D&quot;</span><span class="w">
-</span><span class="p" data-group-id="8817628770-4">}</span><span class="p" data-group-id="8817628770-3">}</span></code></pre>
+</span><span class="p" data-group-id="6815419747-4">}</span><span class="p" data-group-id="6815419747-3">}</span><span class="w">
+
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Ael.Rpc</span><span class="o">.</span><span class="n">signed_url</span><span class="p" data-group-id="6815419747-6">(</span><span class="p" data-group-id="6815419747-7">%{</span><span class="w">
+  </span><span class="s">&quot;action&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;bucket&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;content_type&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;application/pdf&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;resource_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="s">&quot;resource_name&quot;</span><span class="w"> </span><span class="o">=</span><span class="o">&gt;</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="w">
+</span><span class="p" data-group-id="6815419747-7">}</span><span class="p">,</span><span class="w"> </span><span class="ss">access_type</span><span class="p">:</span><span class="w"> </span><span class="ss">:internal</span><span class="p" data-group-id="6815419747-6">)</span><span class="w">
+</span><span class="p" data-group-id="6815419747-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="6815419747-9">%{</span><span class="w">
+  </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;declarations-dev&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">expires_at</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2019-05-01T22:38:35Z&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">inserted_at</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6815419747-10">#</span><span class="nc" data-group-id="6815419747-10">DateTime</span><span class="p" data-group-id="6815419747-10">&lt;</span><span class="mi">2019</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">35.391988</span><span class="nc">Z</span><span class="p" data-group-id="6815419747-10">&gt;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">resource_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;f7f817b2-3134-4625-b87d-e2d7fc8e9b90&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">resource_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;signed_content&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">secret_url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://127.0.0.1/declarations-dev/f7f817b2-3134-4625-b87d-e2d7fc8e9b90/signed_content?GoogleAccessId=ael-dev@ehealth-162117.iam.gserviceaccount.com&amp;Expires=1556750315&amp;Signature=LRS1GJxEVeFtGEHicLP02eTyq3QUD4dSwqN9iGKcUzKBdNmmGh50AyreH%2FSsZenZiZmhbjqfMyUGuCZof8Lq59dFe0d3EPJInzxfhuYDKvlVkGjKLCeeVlgJIFY3DCUpZyOMZfEXgZDV1aFYUggBrVCaU3fRDFYR0evs1CXPe3TJYzYqs5B7enNGIG8Z77AWAOUQdASrDzw4ubrB7FKLB6nw9aD7nXa1zC%2F0%2BF6TLMwk6qQlKo4U93CGccPuPfOMeRM6gUYtFWSWELbftMspkNW0qF99lgCJpMNMHEQcNlBotaA4djq19am8SJJkfs1FNRifNgPgbDViOrWXThbhBQ%3D%3D&quot;</span><span class="w">
+</span><span class="p" data-group-id="6815419747-9">}</span><span class="p" data-group-id="6815419747-8">}</span></code></pre>
   </section>
 </section>
           </div>

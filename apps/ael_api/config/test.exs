@@ -16,7 +16,10 @@ config :logger, level: :warn
 config :ael_api,
   sql_sandbox: true,
   mock: [port: 4040],
-  minio_endpoint: "",
+  minio_endpoint: [
+    public: "",
+    internal: "internal.com"
+  ],
   access_key_id: "",
   secret_access_key: ""
 

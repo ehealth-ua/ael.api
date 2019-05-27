@@ -22,14 +22,14 @@ defmodule Ael.Secrets.API do
 
   ## Examples
 
-      iex> create_secret(%{field: value})
+      iex> create_secret(%{field: value}, [])
       {:ok, %Secret{}}
 
-      iex> create_secret(%{field: bad_value})
+      iex> create_secret(%{}, %{field: bad_value}, [])
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_secret(attrs \\ %{}, backend) do
+  def create_secret(attrs \\ %{}, backend, options) do
     changeset = secret_changeset(%Secret{}, attrs)
 
     case changeset do
@@ -41,7 +41,7 @@ defmodule Ael.Secrets.API do
           changeset
           |> apply_changes()
           |> put_timestamps()
-          |> put_secret_url(backend)
+          |> put_secret_url(backend, options)
 
         {:ok, secret}
     end
@@ -62,7 +62,7 @@ defmodule Ael.Secrets.API do
     |> Map.put(:inserted_at, now)
   end
 
-  def put_secret_url(%Secret{action: action, expires_at: expires_at, content_type: content_type} = secret, "gcs") do
+  def put_secret_url(%Secret{action: action, expires_at: expires_at, content_type: content_type} = secret, "gcs", _) do
     canonicalized_resource = get_canonicalized_resource(secret)
     expires_at = iso8601_to_unix(expires_at)
 
@@ -80,7 +80,7 @@ defmodule Ael.Secrets.API do
     )
   end
 
-  def put_secret_url(%Secret{action: action, expires_at: expires_at} = secret, "swift") do
+  def put_secret_url(%Secret{action: action, expires_at: expires_at} = secret, "swift", _) do
     canonicalized_resource = get_canonicalized_resource(secret)
     expires_at = iso8601_to_unix(expires_at)
     path = Enum.join(["/v1/", get_from_registry(:swift_tenant_id), canonicalized_resource])
@@ -96,7 +96,7 @@ defmodule Ael.Secrets.API do
     Map.put(secret, :secret_url, "#{host}#{path}?temp_url_sig=#{signature}&temp_url_expires=#{expires_at}")
   end
 
-  def put_secret_url(%Secret{action: "PUT"} = secret, "s3") do
+  def put_secret_url(%Secret{action: "PUT"} = secret, "s3", _) do
     url = Confex.fetch_env!(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
@@ -111,10 +111,10 @@ defmodule Ael.Secrets.API do
     Map.put(secret, :secret_url, secret_url)
   end
 
-  def put_secret_url(%Secret{action: action} = secret, "s3") do
+  def put_secret_url(%Secret{action: action} = secret, "s3", options) do
     # check old minio endpoint first
-    url = Confex.fetch_env!(:ael_api, :minio_endpoint) <> get_canonicalized_resource(secret)
-
+    access_type = Keyword.get(options, :access_type, :public)
+    url = Confex.fetch_env!(:ael_api, :minio_endpoint)[access_type] <> get_canonicalized_resource(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
 
@@ -133,7 +133,7 @@ defmodule Ael.Secrets.API do
         Map.put(secret, :secret_url, secret_url)
 
       _ ->
-        url = Confex.fetch_env!(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
+        url = Confex.fetch_env!(:ael_api, :new_minio_endpoint)[access_type] <> get_directory_structure(secret)
         now = NaiveDateTime.to_erl(DateTime.utc_now())
         ttl = get_from_registry(:secrets_ttl)
 

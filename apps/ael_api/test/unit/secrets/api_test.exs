@@ -181,6 +181,28 @@ defmodule Ael.Secrets.APITest do
     assert 200 == code
   end
 
+  @tag :pending
+  test "signes url's with resource name (s3; no content-type) with access optiion internal" do
+    bucket = "declarations-dev"
+    resource_id = "uuid"
+    resource_name = "test.txt"
+
+    secret = create_secret("PUT", bucket, resource_id, resource_name, "", "s3", access_type: :internal)
+
+    assert %Secret{
+             action: "PUT",
+             bucket: ^bucket,
+             expires_at: _,
+             inserted_at: _,
+             resource_id: ^resource_id,
+             resource_name: resource_name,
+             content_type: "",
+             secret_url: secret_url
+           } = secret
+
+    assert "internal.com" <> _ = secret_url
+  end
+
   test "signes url's without resource name" do
     secret = create_secret("PUT", "declarations-dev", "uuid", "gcs")
 
@@ -219,13 +241,14 @@ defmodule Ael.Secrets.APITest do
           bucket: bucket,
           resource_id: resource_id
         },
-        backend
+        backend,
+        []
       )
 
     secret
   end
 
-  def create_secret(action, bucket, resource_id, resource_name, content_type, backend) do
+  def create_secret(action, bucket, resource_id, resource_name, content_type, backend, ops \\ []) do
     {:ok, secret} =
       API.create_secret(
         %{
@@ -235,7 +258,8 @@ defmodule Ael.Secrets.APITest do
           resource_name: resource_name,
           content_type: content_type
         },
-        backend
+        backend,
+        ops
       )
 
     secret
