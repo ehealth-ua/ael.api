@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [1.42.0](https://github.com/edenlabllc/ael.api/compare/1.41.0...1.42.0) (2019-6-4)
+
+
+
+
+### Features:
+
+* allow use internal ip (#18)
+
 ## [1.41.0](https://github.com/edenlabllc/ael.api/compare/1.41.0...1.41.0) (2019-5-9)
 
 
