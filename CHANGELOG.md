@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [1.42.1](https://github.com/edenlabllc/ael.api/compare/1.42.0...1.42.1) (2019-6-5)
+
+
+
+
+### Bug Fixes:
+
+* correct way to get endpoint (#21)
+
 ## [1.42.0](https://github.com/edenlabllc/ael.api/compare/1.41.0...1.42.0) (2019-6-4)
 
 
