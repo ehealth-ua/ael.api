@@ -96,8 +96,9 @@ defmodule Ael.Secrets.API do
     Map.put(secret, :secret_url, "#{host}#{path}?temp_url_sig=#{signature}&temp_url_expires=#{expires_at}")
   end
 
-  def put_secret_url(%Secret{action: "PUT"} = secret, "s3", _) do
-    url = Confex.fetch_env!(:ael_api, :new_minio_endpoint) <> get_directory_structure(secret)
+  def put_secret_url(%Secret{action: "PUT"} = secret, "s3", options) do
+    access_type = Keyword.get(options, :access_type, :public)
+    url = Confex.fetch_env!(:ael_api, :new_minio_endpoint)[access_type] <> get_directory_structure(secret)
     now = NaiveDateTime.to_erl(DateTime.utc_now())
     ttl = get_from_registry(:secrets_ttl)
 
