@@ -25,3 +25,15 @@ release :ael_api do
 
   set(config_providers: [ConfexConfigProvider])
 end
+
+release :ael_ceph_api do
+  set(version: current_version(:ael_api))
+
+  set(
+    applications: [
+      ael_api: :permanent
+    ]
+  )
+
+  set(config_providers: [ConfexConfigProvider])
+end
