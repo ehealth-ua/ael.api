@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [1.42.2](https://github.com/edenlabllc/ael.api/compare/1.42.1...1.42.2) (2019-6-10)
+
+
+
+
+### Bug Fixes:
+
+* support release name in Dockerfile (#26)
+
 ## [1.42.1](https://github.com/edenlabllc/ael.api/compare/1.42.0...1.42.1) (2019-6-5)
 
 
